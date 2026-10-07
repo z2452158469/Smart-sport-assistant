@@ -1,0 +1,10 @@
+**/__pycache__/
+*.py[cod]
+**/.venv/
+**/.deps/
+**/.sites-runtime/
+**/.openai/
+*.tar.gz
+.env
+.env.*
+!.env.example

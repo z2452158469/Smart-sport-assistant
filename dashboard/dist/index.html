@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2b"><meta name="description" content="通过蓝牙实时查看 ESP32 智能运动助手的心率与运动数据。">
+  <title>智能运动助手 · 实时仪表盘</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="./" aria-label="智能运动助手首页"><span class="brand-mark">S<span>↗</span></span><span>SMART<br>SPORT</span></a>
+    <div class="nav-label">工作台</div><div class="nav-current"><span>◉</span> 实时仪表盘</div>
+    <div class="sidebar-bottom"><span class="chip">ESP32 + BLE</span><p>捕捉每一次运动</p><small>设备数据实时直达浏览器</small></div>
+  </aside>
+  <main>
+    <header><div><div class="eyebrow">SMART SPORT ASSISTANT</div><h1>运动数据，实时可见<span class="title-dot">.</span></h1><p class="subtitle">心率与运动传感器监测</p></div><div class="connection"><span id="connectionStatus" class="status" role="status">未连接</span><button id="connectButton" class="primary">连接设备 <span>⌁</span></button></div></header>
+    <div class="transport-row"><label>连接方式 <select id="transportSelect"><option value="serial" selected>USB 串口 · 采集与识别</option><option value="ble">蓝牙 · 数据查看</option></select></label><span>串口 115200 · 50Hz 采集</span></div>
+    <div id="notice" class="notice" role="status">通过 USB 连接 ESP32，点击「连接设备」选择对应 COM 端口。</div>
+    <section class="panel capture-panel" aria-label="运动识别与训练采集">
+      <div class="activity-display"><div class="eyebrow">当前运动类型 · 模型识别</div><strong id="activityValue">尚未识别</strong><span id="activityConfidence">—</span><p id="modelStatus">检查本地模型…</p></div>
+      <div class="capture-controls"><div class="capture-fields"><label>采集标签<select id="labelSelect"><option value="JUMPING_JACK">开合跳</option><option value="SQUAT">蹲起</option><option value="RUNNING">跑步</option><option value="IDLE">静止</option><option value="OTHER">其他动作</option></select></label><label>人员编号<input id="personInput" value="p01" maxlength="40" placeholder="例如 p01"></label></div><div class="capture-actions"><button id="recordButton" class="primary" disabled>开始采集</button><button id="exportButton" class="secondary" disabled>导出 CSV</button><button id="clearButton" class="secondary" disabled>清空记录</button></div><p id="recordStatus" role="status">未采集 · 标签用于训练标注，不代表识别结果</p><p class="capture-help">每次开始生成独立场次；先站稳并选好标签，再开始动作。导出始终使用 m/s²。</p></div>
+    </section>
+    <section class="metrics" aria-label="实时数据">
+      <article class="metric heart"><div class="metric-label">心率 <span class="metric-icon">♡</span></div><div class="metric-value"><span id="heartValue">—</span><small>BPM</small></div><div id="heartState" class="metric-foot">等待设备数据</div><div class="metric-bar"></div></article>
+      <article class="metric acceleration"><div class="metric-label">合加速度 <span class="metric-icon">↗</span></div><div class="metric-value"><span id="accelValue">—</span><small id="accelUnit">m/s²</small></div><div class="metric-foot">包含重力 · 静止约 1g</div><div class="metric-bar"></div></article>
+      <article class="metric temperature"><div class="metric-label">传感器温度 <span class="metric-icon">°</span></div><div class="metric-value"><span id="tempValue">—</span><small>°C</small></div><div class="metric-foot">MPU6050 芯片温度</div><div class="metric-bar"></div></article>
+      <article class="metric runtime"><div class="metric-label">设备运行时间 <span class="metric-icon">◷</span></div><div class="metric-value time"><span id="uptimeValue">—</span></div><div id="dataAge" class="metric-foot">尚未接收数据</div><div class="metric-bar"></div></article>
+    </section>
+    <div class="workspace">
+      <section class="panel trend-panel"><div class="panel-head"><div><h2>实时趋势</h2><p>观察心率与动作的变化</p></div><label class="select-label">时间窗 <select id="windowSelect"><option value="30">30 秒</option><option value="60" selected>60 秒</option><option value="120">120 秒</option></select></label></div>
+        <div class="chart-heading"><span class="legend rose">心率</span><span class="chart-unit">BPM</span></div><div class="chart-wrap"><canvas id="heartChart" aria-label="心率随时间变化趋势"></canvas><div class="chart-empty" id="heartEmpty">连接设备后，心率曲线将在这里出现</div></div>
+        <div class="chart-divider"></div>
+        <div class="chart-heading"><div class="legends"><span class="legend blue">X 轴</span><span class="legend orange">Y 轴</span><span class="legend teal">Z 轴</span><span class="legend purple">合加速度</span></div><select id="unitSelect" aria-label="加速度单位"><option value="ms2">m/s²</option><option value="g">g</option></select></div><div class="chart-wrap"><canvas id="accelChart" aria-label="三轴加速度随时间变化趋势"></canvas><div class="chart-empty" id="accelEmpty">等待三轴加速度数据</div></div>
+        <div class="chart-caption">时间轴显示距现在的秒数 · 每秒约 5 次更新</div>
+      </section>
+      <div class="detail-column">
+        <section class="panel axis-panel"><div class="panel-head"><h2>三轴加速度</h2><span class="small-tag" id="axisUnit">m/s²</span></div><div class="axis-row"><span class="axis-letter blue-bg">X</span><div><div class="axis-track"><div id="xBar" class="axis-fill blue-bg"></div></div></div><strong id="xValue">—</strong></div><div class="axis-row"><span class="axis-letter orange-bg">Y</span><div><div class="axis-track"><div id="yBar" class="axis-fill orange-bg"></div></div></div><strong id="yValue">—</strong></div><div class="axis-row"><span class="axis-letter teal-bg">Z</span><div><div class="axis-track"><div id="zBar" class="axis-fill teal-bg"></div></div></div><strong id="zValue">—</strong></div><div class="magnitude-summary"><span>合加速度</span><div><strong id="magnitudeValue">—</strong><small id="magnitudeUnit">m/s²</small></div></div><p class="axis-note">合加速度 = √(X² + Y² + Z²)，包含重力，静止约 1g。</p></section>
+        <section class="panel"><div class="panel-head"><h2>角速度</h2><span class="small-tag">rad/s</span></div><div class="gyro-grid"><div><span>X 轴</span><strong id="gxValue">—</strong></div><div><span>Y 轴</span><strong id="gyValue">—</strong></div><div><span>Z 轴</span><strong id="gzValue">—</strong></div></div></section>
+        <section class="panel device-panel"><div class="panel-head"><h2>设备状态</h2><span class="device-icon">⌁</span></div><dl><div><dt>设备</dt><dd id="deviceName">未连接</dd></div><div><dt>MPU6050</dt><dd id="mpuStatus">—</dd></div><div><dt>MAX30102</dt><dd id="pulseStatus">—</dd></div><div><dt>手指接触</dt><dd id="fingerStatus">—</dd></div><div><dt>红外原始值</dt><dd id="irValue">—</dd></div><div><dt>接收速率</dt><dd id="receiveRate">—</dd></div></dl></section>
+      </div>
+    </div>
+    <footer><span>● <span id="footerState">等待连接</span></span><span>心率测量时请保持手指稳定</span></footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

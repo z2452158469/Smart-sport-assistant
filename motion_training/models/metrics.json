@@ -1,0 +1,231 @@
+{
+  "protocol_version": 1,
+  "sample_rate_hz": 50,
+  "window_seconds": 2,
+  "stride_seconds": 0.5,
+  "acceleration_unit": "m/s^2",
+  "feature_names": [
+    "mean",
+    "std",
+    "min",
+    "max",
+    "range",
+    "rms",
+    "mean_abs_change",
+    "peak_count",
+    "dominant_frequency_hz",
+    "dominant_power_ratio"
+  ],
+  "classes": [
+    "IDLE",
+    "JUMPING_JACK",
+    "RUNNING",
+    "SQUAT"
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scikit_learn": "1.9.1",
+    "joblib": "1.6.0"
+  },
+  "accuracy": 0.9620253164556962,
+  "classification_report": {
+    "IDLE": {
+      "precision": 0.9047619047619048,
+      "recall": 1.0,
+      "f1-score": 0.95,
+      "support": 19.0
+    },
+    "JUMPING_JACK": {
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1-score": 0.9361702127659575,
+      "support": 50.0
+    },
+    "RUNNING": {
+      "precision": 0.9523809523809523,
+      "recall": 1.0,
+      "f1-score": 0.975609756097561,
+      "support": 40.0
+    },
+    "SQUAT": {
+      "precision": 0.9607843137254902,
+      "recall": 1.0,
+      "f1-score": 0.98,
+      "support": 49.0
+    },
+    "accuracy": 0.9620253164556962,
+    "macro avg": {
+      "precision": 0.9544817927170868,
+      "recall": 0.97,
+      "f1-score": 0.9604449922158796,
+      "support": 158.0
+    },
+    "weighted avg": {
+      "precision": 0.9643300358117929,
+      "recall": 0.9620253164556962,
+      "f1-score": 0.9614107650772171,
+      "support": 158.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      19,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      44,
+      2,
+      2
+    ],
+    [
+      0,
+      0,
+      40,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      49
+    ]
+  ],
+  "group_by": "session",
+  "seed": 42,
+  "train_windows": 477,
+  "test_windows": 158,
+  "train_groups": [
+    "[\"p01\", \"session_1791389430621_4a8a1c5a-0d99-4b86-941d-46671e0cff83\"]",
+    "[\"p01\", \"session_1791389498214_82cd0281-de87-41b0-a1c9-50d5e6985e7e\"]",
+    "[\"p02\", \"session_1791389535273_729491f9-4cbc-4b13-a3fa-e013070b58d8\"]",
+    "[\"p02\", \"session_1791389606104_5956c790-ed5c-4fe9-b961-25da8fadd060\"]",
+    "[\"p02\", \"session_1791389631997_c87102b5-f346-4489-bc25-41c818ef854f\"]",
+    "[\"p03\", \"session_1791389662776_30e982dc-c7e2-4dd5-92f8-b36253f6d803\"]",
+    "[\"p03\", \"session_1791389730273_88e04952-c4cd-4371-8fc6-1bd1011ce2f1\"]",
+    "[\"p03\", \"session_1791389759829_d5766c65-0199-4720-a168-236da0371e95\"]",
+    "[\"p03\", \"session_1791389780021_89804160-a243-40fc-a24d-abebff1da868\"]",
+    "[\"p04\", \"session_1791390530339_b4794d58-0a7c-4e06-a7da-cd8e92b26049\"]",
+    "[\"p04\", \"session_1791390556109_3876a6e4-5e52-4a7b-87a2-5902164693a9\"]",
+    "[\"p04\", \"session_1791390596861_4ddd8b2e-0967-41d2-8585-dfbde943beb3\"]"
+  ],
+  "test_groups": [
+    "[\"p01\", \"session_1791389385499_cd99b9ef-c7de-467e-8457-9dcc7a411ec4\"]",
+    "[\"p01\", \"session_1791389464668_c4cfb065-9b2e-44a4-9441-714173db134f\"]",
+    "[\"p02\", \"session_1791389574825_599a9e41-0c8c-4651-93a0-fd584ba1e640\"]",
+    "[\"p04\", \"session_1791390580704_2354d931-375c-4b30-a76e-71c4b4edd04f\"]"
+  ],
+  "sampling": [
+    {
+      "session": "session_1791389385499_cd99b9ef-c7de-467e-8457-9dcc7a411ec4",
+      "person": "p01",
+      "measured_hz": 50.0,
+      "rows": 898
+    },
+    {
+      "session": "session_1791389430621_4a8a1c5a-0d99-4b86-941d-46671e0cff83",
+      "person": "p01",
+      "measured_hz": 50.0,
+      "rows": 887
+    },
+    {
+      "session": "session_1791389464668_c4cfb065-9b2e-44a4-9441-714173db134f",
+      "person": "p01",
+      "measured_hz": 50.0,
+      "rows": 740
+    },
+    {
+      "session": "session_1791389498214_82cd0281-de87-41b0-a1c9-50d5e6985e7e",
+      "person": "p01",
+      "measured_hz": 50.0,
+      "rows": 527
+    },
+    {
+      "session": "session_1791389535273_729491f9-4cbc-4b13-a3fa-e013070b58d8",
+      "person": "p02",
+      "measured_hz": 50.0,
+      "rows": 870
+    },
+    {
+      "session": "session_1791389574825_599a9e41-0c8c-4651-93a0-fd584ba1e640",
+      "person": "p02",
+      "measured_hz": 50.0,
+      "rows": 881
+    },
+    {
+      "session": "session_1791389606104_5956c790-ed5c-4fe9-b961-25da8fadd060",
+      "person": "p02",
+      "measured_hz": 50.0,
+      "rows": 685
+    },
+    {
+      "session": "session_1791389631997_c87102b5-f346-4489-bc25-41c818ef854f",
+      "person": "p02",
+      "measured_hz": 50.0,
+      "rows": 645
+    },
+    {
+      "session": "session_1791389662776_30e982dc-c7e2-4dd5-92f8-b36253f6d803",
+      "person": "p03",
+      "measured_hz": 50.0,
+      "rows": 858
+    },
+    {
+      "session": "session_1791389730273_88e04952-c4cd-4371-8fc6-1bd1011ce2f1",
+      "person": "p03",
+      "measured_hz": 50.0,
+      "rows": 855
+    },
+    {
+      "session": "session_1791389759829_d5766c65-0199-4720-a168-236da0371e95",
+      "person": "p03",
+      "measured_hz": 50.0,
+      "rows": 593
+    },
+    {
+      "session": "session_1791389780021_89804160-a243-40fc-a24d-abebff1da868",
+      "person": "p03",
+      "measured_hz": 50.0,
+      "rows": 835
+    },
+    {
+      "session": "session_1791390530339_b4794d58-0a7c-4e06-a7da-cd8e92b26049",
+      "person": "p04",
+      "measured_hz": 50.0,
+      "rows": 588
+    },
+    {
+      "session": "session_1791390556109_3876a6e4-5e52-4a7b-87a2-5902164693a9",
+      "person": "p04",
+      "measured_hz": 50.0,
+      "rows": 667
+    },
+    {
+      "session": "session_1791390580704_2354d931-375c-4b30-a76e-71c4b4edd04f",
+      "person": "p04",
+      "measured_hz": 50.0,
+      "rows": 382
+    },
+    {
+      "session": "session_1791390596861_4ddd8b2e-0967-41d2-8585-dfbde943beb3",
+      "person": "p04",
+      "measured_hz": 50.0,
+      "rows": 546
+    }
+  ],
+  "feature_importances": {
+    "mean": 0.06128697239688039,
+    "std": 0.13309261930547991,
+    "min": 0.1449470136403951,
+    "max": 0.15396531439879618,
+    "range": 0.1367262389395896,
+    "rms": 0.06546381796069378,
+    "mean_abs_change": 0.18967858626774833,
+    "peak_count": 0.01202875148100671,
+    "dominant_frequency_hz": 0.08987510438095071,
+    "dominant_power_ratio": 0.012935581228459316
+  }
+}
